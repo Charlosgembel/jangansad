@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semangat Azel</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(180deg, #0a0a0a, #191919, #000000);
+        color: white;
+        overflow: hidden;
+    }
+
+    .container {
+        width: 100%;
+        height: 100vh;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        animation: fadeIn 1s ease-out;
+    }
+
+    img.stiker {
+        width: 160px;
+        height: auto;
+        margin-bottom: 15px;
+        animation: bounce 2.2s infinite ease-in-out;
+        filter: drop-shadow(0 0 10px #ffbfff80);
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-bottom: 10px;
+        text-shadow: 0 0 12px #ffcdfa60;
+    }
+
+    p {
+        font-size: 18px;
+        margin-top: 0;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+        text-shadow: 0 0 10px #d9b3ff50;
+    }
+
+    button {
+        background: #ff89f9;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 16px;
+        color: #000;
+        cursor: pointer;
+        margin-top: 20px;
+        font-weight: bold;
+        box-shadow: 0 0 8px #ff89f980;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        background: #ffa7ff;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+        position: fixed;
+        top: -20px;
+        color: pink;
+        font-size: 14px;
+        animation: fall linear infinite;
+        opacity: 0.85;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(110vh) rotate(360deg); }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Background music -->
+<audio autoplay loop>
+    <source src="https://files.catbox.moe/7x3q8p.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SLIDE 1 -->
+<div class="container" id="slide1" style="display:flex;">
+    <img class="stiker" src="https://i.ibb.co/02bS1DH/cutecute.png">
+    <h1>Selamat Azel! 🎉</h1>
+    <p>Ujianmu sudah selesai. Kamu hebat dan kuat karena sudah berusaha sampai akhir! 🤍</p>
+    <button onclick="next()">Lanjut</button>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="container" id="slide2">
+    <img class="stiker" src="https://i.ibb.co/02bS1DH/cutecute.png">
+    <h1>Semangat Lomba Sholawat! ✨</h1>
+    <p>Semangat lomba sholawat! Semoga lancar.</p>
+    <button onclick="prev()">Kembali</button>
+    <button onclick="next()">Lanjut</button>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="container" id="slide3">
+    <img class="stiker" src="https://i.ibb.co/02bS1DH/cutecute.png">
+    <h1>Maaf ya... 😅</h1>
+    <p>Maaf kalau aku sering spam WA. Niatnya cuma mau bikin kamu semangat, bukan ganggu.</p>
+    <button onclick="prev()">Kembali</button>
+    <button onclick="next()">Lanjut</button>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="container" id="slide4">
+    <img class="stiker" src="https://i.ibb.co/02bS1DH/cutecute.png">
+    <h1>SEMANGAT! 💫</h1>
+    <p>SEMANGAT BUAT APAPUN YANG KAMU JALANIN.</p>
+    <button onclick="prev()">Kembali</button>
+</div>
+
+<script>
+    let now = 1;
+
+    function showSlide(n) {
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById("slide" + i).style.display = "none";
+        }
+        document.getElementById("slide" + n).style.display = "flex";
+    }
+
+    function next() {
+        now++;
+        if (now > 4) now = 4;
+        showSlide(now);
+    }
+
+    function prev() {
+        now--;
+        if (now < 1) now = 1;
+        showSlide(now);
+    }
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (12 + Math.random() * 10) + "px";
+        heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => { heart.remove(); }, 7000);
+    }
+
+    setInterval(createHeart, 350);
+</script>
+
+</body>
+</html>
