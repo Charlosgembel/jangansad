@@ -24,7 +24,7 @@
         flex-direction: column;
         text-align: center;
         padding: 20px;
-        animation: fadeIn 1s ease-out;
+        animation: fadeIn 0.9s ease-out;
     }
 
     img.stiker {
@@ -32,7 +32,7 @@
         height: auto;
         margin-bottom: 15px;
         animation: bounce 2.2s infinite ease-in-out;
-        filter: drop-shadow(0 0 10px #ffbfff80);
+        filter: drop-shadow(0 0 10px #ffd6ff80);
     }
 
     @keyframes bounce {
@@ -56,14 +56,14 @@
     }
 
     button {
-        background: #ff89f9;
+        background: #ffb3ff;
         border: none;
         padding: 12px 24px;
         border-radius: 10px;
         font-size: 16px;
         color: #000;
         cursor: pointer;
-        margin-top: 20px;
+        margin: 8px;
         font-weight: bold;
         box-shadow: 0 0 8px #ff89f980;
         transition: 0.2s;
@@ -71,7 +71,7 @@
 
     button:hover {
         transform: scale(1.05);
-        background: #ffa7ff;
+        background: #ffcaff;
     }
 
     @keyframes fadeIn {
@@ -79,13 +79,14 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    .heart {
+    /* Falling stars */
+    .star {
         position: fixed;
         top: -20px;
-        color: pink;
+        color: #ffe7ff;
         font-size: 14px;
         animation: fall linear infinite;
-        opacity: 0.85;
+        opacity: 0.9;
     }
 
     @keyframes fall {
@@ -97,9 +98,9 @@
 
 <body>
 
-<!-- Background music -->
+<!-- Musik baru -->
 <audio autoplay loop>
-    <source src="https://files.catbox.moe/7x3q8p.mp3" type="audio/mpeg">
+    <source src="https://files.catbox.moe/1oc7xg.mp3" type="audio/mpeg">
 </audio>
 
 <!-- SLIDE 1 -->
@@ -115,8 +116,10 @@
     <img class="stiker" src="https://i.ibb.co/02bS1DH/cutecute.png">
     <h1>Semangat Lomba Sholawat! ✨</h1>
     <p>Semangat lomba sholawat! Semoga lancar.</p>
-    <button onclick="prev()">Kembali</button>
-    <button onclick="next()">Lanjut</button>
+    <div>
+        <button onclick="prev()">Kembali</button>
+        <button onclick="next()">Lanjut</button>
+    </div>
 </div>
 
 <!-- SLIDE 3 -->
@@ -124,8 +127,10 @@
     <img class="stiker" src="https://i.ibb.co/02bS1DH/cutecute.png">
     <h1>Maaf ya... 😅</h1>
     <p>Maaf kalau aku sering spam WA. Niatnya cuma mau bikin kamu semangat, bukan ganggu.</p>
-    <button onclick="prev()">Kembali</button>
-    <button onclick="next()">Lanjut</button>
+    <div>
+        <button onclick="prev()">Kembali</button>
+        <button onclick="next()">Lanjut</button>
+    </div>
 </div>
 
 <!-- SLIDE 4 -->
@@ -133,14 +138,29 @@
     <img class="stiker" src="https://i.ibb.co/02bS1DH/cutecute.png">
     <h1>SEMANGAT! 💫</h1>
     <p>SEMANGAT BUAT APAPUN YANG KAMU JALANIN.</p>
-    <button onclick="prev()">Kembali</button>
+    <div>
+        <button onclick="prev()">Kembali</button>
+        <button onclick="next()">Lanjut</button>
+    </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="container" id="slide5">
+    <img class="stiker" src="https://i.ibb.co/02bS1DH/cutecute.png">
+    <h1>Kita tetap chattan kan? 😳</h1>
+    <p>Karna ujiannya udah selesai, kita tetap chattan kan? (jawab di WA)</p>
+
+    <div style="display:flex; gap:20px; margin-top:10px;">
+        <button onclick="iya()">Iya</button>
+        <button id="noBtn" onmouseover="moveButton()">Tidak</button>
+    </div>
 </div>
 
 <script>
     let now = 1;
 
     function showSlide(n) {
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 1; i <= 5; i++) {
             document.getElementById("slide" + i).style.display = "none";
         }
         document.getElementById("slide" + n).style.display = "flex";
@@ -148,7 +168,7 @@
 
     function next() {
         now++;
-        if (now > 4) now = 4;
+        if (now > 5) now = 5;
         showSlide(now);
     }
 
@@ -158,19 +178,30 @@
         showSlide(now);
     }
 
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (12 + Math.random() * 10) + "px";
-        heart.style.animationDuration = (3 + Math.random() * 4) + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => { heart.remove(); }, 7000);
+    function iya() {
+        window.location.href = "https://wa.me/6282245730774";
     }
 
-    setInterval(createHeart, 350);
+    function moveButton() {
+        const b = document.getElementById("noBtn");
+        b.style.position = "relative";
+        b.style.left = (Math.random() * 120 - 60) + "px";
+        b.style.top = (Math.random() * 80 - 40) + "px";
+    }
+
+    function createStar() {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.innerHTML = "✨";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.fontSize = (12 + Math.random() * 10) + "px";
+        star.style.animationDuration = (3 + Math.random() * 4) + "s";
+        document.body.appendChild(star);
+
+        setTimeout(() => { star.remove(); }, 7000);
+    }
+
+    setInterval(createStar, 350);
 </script>
 
 </body>
